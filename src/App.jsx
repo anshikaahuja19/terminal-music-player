@@ -41,22 +41,75 @@ function App() {
   });
 
   return (
-    <Box flexDirection="column">
-      <Text>My Music</Text>
+  <Box flexDirection="column" height="100%">
 
-      {songs.map((song, index) => (
-        <Text key={song.path}>
-          {index === selected ? "▶ " : "  "}
-          {index + 1}. {song.title} | {song.artist} | {song.album} |{" "}
-          {formatDuration(song.duration)}
-        </Text>
-      ))}
-
-      <Text>
-        {isPlaying ? "Playing" : "Paused"}
-      </Text>
+    {/* APP HEADING */}
+    <Box justifyContent="center" marginBottom={1}>
+      <Text bold>TERMINAL MUSIC PLAYER</Text>
     </Box>
-  );
+
+    {/* TOP SECTION */}
+    <Box flexDirection="row" height="65%">
+
+      {/* MY MUSIC */}
+      <Box
+        flexDirection="column"
+        width="35%"
+        borderStyle="single"
+        padding={1}
+      >
+        <Text bold>My Music</Text>
+
+        {/* SPACE BELOW HEADING */}
+        <Box marginBottom={1} />
+
+        {songs.map((song, index) => (
+          <Text key={song.path}>
+            {index === selected ? "▶ " : "  "}
+            {song.title}
+          </Text>
+        ))}
+      </Box>
+
+      {/* NOW PLAYING */}
+      <Box
+        flexDirection="column"
+        width="65%"
+        borderStyle="single"
+        padding={1}
+      >
+        <Text bold>Now Playing</Text>
+         <Box marginBottom={1} />
+
+        <Text>
+          {songs.length > 0 ? songs[selected].title : "No song selected"}
+        </Text>
+
+        <Text>
+          {songs.length > 0 ? songs[selected].artist : ""}
+        </Text>
+
+        <Text>
+          {isPlaying ? "▶ Playing" : "⏸ Paused"}
+        </Text>
+      </Box>
+
+    </Box>
+
+    {/* QUEUE */}
+    <Box
+      flexDirection="column"
+      height="35%"
+      borderStyle="single"
+      padding={1}
+    >
+      <Text bold>Queue</Text>
+
+      <Text>Upcoming songs</Text>
+    </Box>
+
+  </Box>
+);
 }
 
 export default App;
