@@ -8,6 +8,7 @@ function App() {
   const [songs, setSongs] = useState([]);
   const [selected, setSelected] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const queue = songs.slice(selected + 1, selected + 4);
 
   useEffect(() => {
     async function loadSongs() {
@@ -97,16 +98,29 @@ function App() {
     </Box>
 
     {/* QUEUE */}
-    <Box
-      flexDirection="column"
-      height="35%"
-      borderStyle="single"
-      padding={1}
-    >
-      <Text bold>Queue</Text>
+   <Box
+  flexDirection="column"
+  height="35%"
+  borderStyle="single"
+  padding={1}
+>
+  <Text bold>Queue</Text>
 
-      <Text>Upcoming songs</Text>
-    </Box>
+  <Box marginTop={2}>
+
+    {queue.length === 0 ? (
+      <Text>No upcoming songs</Text>
+    ) : (
+      queue.map((song, index) => (
+        <Box key={song.path} marginRight={3}>
+          <Text>
+            • {song.title}
+          </Text>
+        </Box>
+      ))
+    )}
+  </Box>
+</Box>
 
   </Box>
 );
